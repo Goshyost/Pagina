@@ -131,9 +131,3 @@ main {
         gap: 4px;
     }
 }
-
-@media (min-width: 1000px) {
-    .game-board {
-        width: 400px;
-    }
-}
