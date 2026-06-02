@@ -37,14 +37,6 @@ main {
     width: 100%;
 }
 
-.game-board {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1vw;
-    width: min(95vw, 700px);
-    perspective: 1000px;
-}
-
 .card {
     width: 100%;
     aspect-ratio: 3/4;
@@ -124,9 +116,24 @@ main {
     background: #d35400;
 }
 
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: min(95vw, 500px);
+    margin: 0 auto;
+    perspective: 1000px;
+}
+
 @media (max-width: 600px) {
     .game-board {
         width: 98vw;
-        gap: .5vw;
+        gap: 4px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .game-board {
+        width: 400px;
     }
 }
