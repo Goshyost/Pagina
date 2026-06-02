@@ -1,0 +1,132 @@
+:root {
+    --bg-color: #2c3e50;
+    --card-back: #34495e;
+    --matched: #2ecc71;
+    --text-color: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 15px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1vw;
+    width: min(95vw, 700px);
+    perspective: 1000px;
+}
+
+.card {
+    width: 100%;
+    aspect-ratio: 3/4;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    cursor: pointer;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,.3);
+}
+
+.card-back {
+    background: var(--card-back);
+    border: 2px solid #7f8c8d;
+}
+
+.card-back::after {
+    content: "?";
+    font-size: clamp(2rem, 8vw, 4rem);
+    color: #7f8c8d;
+}
+
+.card-front {
+    transform: rotateY(180deg);
+    color: white;
+}
+
+.symbol-text {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-weight: 700;
+}
+
+.name-text {
+    font-size: clamp(.8rem, 2.8vw, 1.3rem);
+    font-weight: 600;
+}
+
+.type-indicator {
+    margin-top: 8px;
+    font-size: clamp(.5rem, 1.5vw, .8rem);
+    opacity: .85;
+}
+
+.card.matched .card-front {
+    background: var(--matched) !important;
+}
+
+.reset-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #e67e22;
+    color: white;
+}
+
+.reset-btn:hover {
+    background: #d35400;
+}
+
+@media (max-width: 600px) {
+    .game-board {
+        width: 98vw;
+        gap: .5vw;
+    }
+}
