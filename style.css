@@ -47,10 +47,6 @@ main {
     transform: scale(1.0)
 }
 
-.card:hover {
-    transform: scale(1.1);
-}
-
 .card.flipped {
     transform: rotateY(180deg);
 }
@@ -194,6 +190,14 @@ main {
 
 .modal-btn:hover {
     background: #27ae60;
+}
+
+@media (hover: hover) {
+    .card:not(.flipped):not(.matched):hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        z-index: 5;
+    }
 }
 
 @media (max-width: 600px) {
