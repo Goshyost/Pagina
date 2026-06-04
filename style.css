@@ -44,10 +44,11 @@ main {
     transform-style: preserve-3d;
     transition: transform .5s;
     cursor: pointer;
+    transform: scale(1.0)
 }
 
-.card-back:hover {
-    transform: scale(1.2);
+.card:hover {
+    transform: scale(1.1);
 }
 
 .card.flipped {
