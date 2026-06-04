@@ -12,6 +12,7 @@ const elementList = [
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
+let matchedPairs = 0; // Contador de parejas encontradas
 
 const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -62,6 +63,8 @@ const createBoard = () => {
             </div>
         `;
 
+        // 'touchend' puede añadirse si buscas optimización extrema en móvil, 
+        // pero 'click' funciona perfectamente en navegadores móviles modernos.
         card.addEventListener('click', flipCard);
 
         board.appendChild(card);
@@ -98,6 +101,15 @@ const disableCards = () => {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
 
+    matchedPairs++;
+    
+    // Si encontramos las 8 parejas, mostramos el modal
+    if (matchedPairs === elementList.length) {
+        setTimeout(() => {
+            showWinModal();
+        }, 500);
+    }
+
     resetTurn();
 };
 
@@ -117,13 +129,28 @@ const resetTurn = () => {
     lockBoard = false;
 };
 
+// Funciones para controlar el Modal
+const showWinModal = () => {
+    const modal = document.getElementById('winModal');
+    modal.classList.add('show');
+};
+
+const hideWinModal = () => {
+    const modal = document.getElementById('winModal');
+    modal.classList.remove('show');
+};
+
 const resetGame = () => {
+    matchedPairs = 0;
     firstCard = null;
     secondCard = null;
     lockBoard = false;
+    hideWinModal();
     createBoard();
 };
 
+// Eventos de botones
 document.getElementById('resetButton').addEventListener('click', resetGame);
+document.getElementById('modalResetButton').addEventListener('click', resetGame);
 
 createBoard();
