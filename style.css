@@ -46,6 +46,10 @@ main {
     cursor: pointer;
 }
 
+.card:hover {
+    scale(1.2)
+}
+
 .card.flipped {
     transform: rotateY(180deg);
 }
