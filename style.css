@@ -37,18 +37,27 @@ main {
     width: 100%;
 }
 
+/* --- ESTILOS DE LAS CARTAS --- */
 .card {
     width: 100%;
     aspect-ratio: 3/4;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform .5s;
+    /* Curva cubic-bezier para lograr el efecto físico de "rebote" al girar */
+    transition: transform .6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
     cursor: pointer;
-    transform: scale(1.0)
 }
 
+/* Animación: Levanta la carta (scale 1.1) y la voltea a la vez al hacer click */
 .card.flipped {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) scale(1.1);
+    z-index: 10; /* Se sitúa por encima de las demás mientras flota */
+}
+
+/* Cuando se encuentra la pareja, la carta vuelve a su tamaño normal sobre el tablero */
+.card.matched {
+    transform: rotateY(180deg) scale(1);
+    z-index: 1;
 }
 
 .card-face {
@@ -64,6 +73,7 @@ main {
     text-align: center;
     padding: 5px;
     box-shadow: 0 4px 8px rgba(0,0,0,.3);
+    transition: box-shadow .6s;
 }
 
 .card-back {
@@ -80,6 +90,11 @@ main {
 .card-front {
     transform: rotateY(180deg);
     color: white;
+}
+
+/* Sombra más profunda y realista cuando la carta está "levantada" en el aire */
+.card.flipped .card-front {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
 }
 
 .symbol-text {
@@ -102,6 +117,7 @@ main {
     background: var(--matched) !important;
 }
 
+/* --- BOTONES Y TABLERO --- */
 .reset-btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -126,7 +142,7 @@ main {
     perspective: 1000px;
 }
 
-/* --- ESTILOS DEL POP-UP (MODAL) --- */
+/* --- ESTILOS DEL POP-UP (MODAL RESPONSIVO) --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -154,7 +170,7 @@ main {
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    width: min(90vw, 400px); /* Excelente para móviles */
+    width: min(90vw, 400px);
     border: 2px solid #2ecc71;
     transform: scale(0.8);
     transition: transform 0.3s ease;
@@ -184,7 +200,7 @@ main {
     cursor: pointer;
     background: #2ecc71;
     color: white;
-    width: 100%; /* Botón grande fácil de presionar en pantallas táctiles */
+    width: 100%;
     transition: background 0.2s;
 }
 
@@ -192,14 +208,7 @@ main {
     background: #27ae60;
 }
 
-@media (hover: hover) {
-    .card:not(.flipped):not(.matched):hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        z-index: 5;
-    }
-}
-
+/* --- MEDIA QUERIES --- */
 @media (max-width: 600px) {
     .game-board {
         width: 98vw;
