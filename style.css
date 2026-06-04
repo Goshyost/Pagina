@@ -46,7 +46,7 @@ main {
     cursor: pointer;
 }
 
-.card-face:hover {
+.card-back:hover {
     scale(1.2)
 }
 
